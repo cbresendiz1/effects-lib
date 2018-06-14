@@ -10,9 +10,6 @@ hello = do putStr "Name? "
            putStrLn ("I've said hello to: " ++ show !get ++ " people")
            hello
 
-main : IO ()
-main = run hello
-
 data Stater : Effect where
     Get : { a }    Stater a
     Put : b ->  { a ==> b } Stater ()
@@ -33,7 +30,11 @@ put n = call (Put n)
 putM : y -> Eff () [STATE2 x] [STATE2 y]
 putM val = call (Put val)
 
-roger : List Nat -> Eff (List Nat) [STATE2 (List Nat)]
+roger : List Int -> Eff (List Int) [STATE2 (List Int)]
 roger t = do put t
              x <- get
              pure x
+
+main : IO ()
+--main = putStrLn $ show $ runPure (roger [2])
+main = run hello
