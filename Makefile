@@ -19,4 +19,7 @@ doc:
 doc_clean:
 	rm -rf ${PKG}_doc
 
+trial:
+	$(IDRIS) trial.idr
+
 .PHONY: build clean install rebuild doc doc_clean

@@ -19,6 +19,7 @@ import public Data.List
 public export
 Effect : Type
 Effect = (x : Type) -> Type -> (x -> Type) -> Type
+-- Effect = (x : Type) -> Type -> (a -> x -> Type) -> Type
 
 ||| The `EFFECT` Data type describes how to promote the Effect
 ||| description into a concrete effect.
