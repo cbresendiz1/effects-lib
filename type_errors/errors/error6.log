@@ -1,0 +1,10 @@
+typeExample1F5.idr:26:11-60:
+   |
+26 | interface Handler (e : Effect) (m : Type -> Type) (a : Type) where
+   |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+When checking type of Effects2.handle:
+Type mismatch between
+        t -> Type (Type of resk _ _)
+and
+        Type (Expected type)
+

@@ -1,0 +1,7 @@
+typeExample0F2.idr:26:11-60:
+   |
+26 | interface Handler (e : Effect) (m : Type -> Type) (a : Type) where
+   |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+When checking type of Effects2.handle:
+No such variable res
+

@@ -1,7 +1,7 @@
 module Effects2
 
 import Language.Reflection
-import public Effect2.Default
+--import public Effect2.Default
 import Data.Vect
 import public Data.List
 
@@ -19,14 +19,15 @@ import public Data.List
 
 public export
 Effect : Type
-Effect = (x : Type) -> Type -> (a : Type -> x -> Type) -> Type
+Effect = (x : Type) -> (Type -> Type) -> (Type -> x -> Type) -> Type
+--Effect = (x : Type) -> Type -> (x -> Type) -> Type
 
 --  ||| The `EFFECT` Data type describes how to promote the Effect
 --  ||| description into a concrete effect.
 --  public export
 --  %error_reverse
-data EFFECT : Type where
-     MkEff : Type -> Effect -> EFFECT
+--data EFFECT : Type where
+--     MkEff : Type -> Effect -> EFFECT
 --  
 --  -- 'sig' gives the signature for an effect. There are four versions
 --  -- depending on whether there is no resource needed,
@@ -57,6 +58,19 @@ data EFFECT : Type where
 --  
 --  ||| Handler interfaces describe how an effect `e` is translated to the
 --  ||| underlying computation context `m` for execution.
+
+
+-- ****  Annotated effects handler
+-- **** public export
+-- **** interface Handler (e : Effect) (m : Type -> Type) (a : Type) where
+-- ****   ||| How to handle the effect.
+-- ****   |||
+-- ****   ||| @ r The resource being handled.
+-- ****   ||| @ eff The effect to be applied.
+-- ****   ||| @ k The continuation to pass the result of the effect
+-- ****   covering handle : (r : res) -> (eff : e t (the Type res) (the (t -> Type) resk)) ->
+-- ****                     (k : ((x : t) -> (the (t -> Type) resk) x -> m a)) -> m a
+
 public export
 interface Handler (e : Effect) (m : Type -> Type) (a : Type) where
   ||| How to handle the effect.
@@ -64,8 +78,14 @@ interface Handler (e : Effect) (m : Type -> Type) (a : Type) where
   ||| @ r The resource being handled.
   ||| @ eff The effect to be applied.
   ||| @ k The continuation to pass the result of the effect
-  covering handle : (r : res) -> (eff : e t res resk) ->
+  covering handle : (r : ((the (Type -> Type) res) a)) -> 
+                    (eff : e
+                           t
+                           (the (Type -> Type) res) 
+                           (the (Type -> t -> Type) resk)) -> 
                     (k : ((x : t) -> resk a x -> m a)) -> m a
+
+
 --  
 --  ||| Get the resource type (handy at the REPL to find out about an effect)
 --  resourceType : EFFECT -> Type

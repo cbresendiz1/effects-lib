@@ -1,0 +1,24 @@
+typeExample1F2.idr:26:11-60:
+   |
+26 | interface Handler (e : Effect) (m : Type -> Type) (a : Type) where
+   |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+When checking right hand side of Effects2.handle with expected type
+        the (Type -> Type) res a ->
+        e t (the (Type -> Type) res a) (the (Type -> t -> Type) resk a) ->
+        ((x : t) -> resk a x -> m a) -> m a
+
+Type mismatch between
+        the (Type -> Type) res2 a ->
+        e t (the (Type -> Type) res2 a) (the (Type -> t -> Type) resk1 a) ->
+        ((x : t) -> resk1 a x -> m a) -> m a (Type of meth t)
+and
+        res a ->
+        e t (res a) (resk a) ->
+        ((x : t) -> resk a x -> m a) -> m a (Expected type)
+
+Specifically:
+        Type mismatch between
+                Type -> t -> Type
+        and
+                res a
+
