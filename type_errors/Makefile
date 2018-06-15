@@ -1,4 +1,4 @@
-PHONY : all
+PHONY : show
 show : 
 	bash runIdrisExample.sh
 
